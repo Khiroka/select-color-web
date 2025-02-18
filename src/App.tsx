@@ -6,17 +6,24 @@ import { COLORS, LEVEL_COLORS } from "./constants"
 import { generateQuestion, updateHighScore } from "./utils"
 import styles from "./styles"
 
+type Question = {
+  backgroundColor: keyof typeof COLORS;
+  textColor: keyof typeof COLORS;
+  colorWordJP: string;
+  correctAnswer: string;
+};
+
 const App: React.FC = () => {
-  const [gameStarted, setGameStarted] = useState(false)
-  const [gameMode, setGameMode] = useState<"time" | "score" | null>(null)
-  const [level, setLevel] = useState(1)
-  const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(60)
-  const [currentQuestion, setCurrentQuestion] = useState<any>(null)
-  const [questionTimer, setQuestionTimer] = useState(5)
-  const [gameOver, setGameOver] = useState(false)
-  const [highScoreTime, setHighScoreTime] = useState(0)
-  const [highScoreEndless, setHighScoreEndless] = useState(0)
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameMode, setGameMode] = useState<"time" | "score" | null>(null);
+  const [level, setLevel] = useState(1);
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+  const [questionTimer, setQuestionTimer] = useState(5);
+  const [gameOver, setGameOver] = useState(false);
+  const [highScoreTime, setHighScoreTime] = useState(0);
+  const [highScoreEndless, setHighScoreEndless] = useState(0);
 
   // Load high scores
   useEffect(() => {
@@ -39,7 +46,7 @@ const App: React.FC = () => {
 
   // Answer handling
   const handleAnswer = (selectedColor: string) => {
-    if (currentQuestion.correctAnswer === selectedColor) {
+    if (currentQuestion && currentQuestion.correctAnswer === selectedColor) {
       setScore((prev) => prev + 1)
     } else if (gameMode === "score") {
       setGameOver(true)
@@ -137,23 +144,24 @@ const App: React.FC = () => {
         <span style={styles.scoreText}>Score: {score}</span>
         <span style={styles.timeText}>{gameMode === "time" ? `Time: ${timeLeft}s` : `Time: ${questionTimer}s`}</span>
       </div>
-      <div style={{ ...styles.card, backgroundColor: COLORS[currentQuestion.backgroundColor] }}>
-        <span style={{ ...styles.cardText, color: COLORS[currentQuestion.textColor] }}>
-          {currentQuestion.colorWordJP}
-        </span>
-      </div>
+      {currentQuestion && (
+        <div style={{ ...styles.card, backgroundColor: COLORS[currentQuestion.backgroundColor] }}>
+          <span style={{ ...styles.cardText, color: COLORS[currentQuestion.textColor] }}>
+            {currentQuestion.colorWordJP}
+          </span>
+        </div>
+      )}
       <div style={styles.buttonContainer}>
-        {LEVEL_COLORS[level].map((color) => (
-          <button
-            key={color}
-            style={{ ...styles.colorButton, backgroundColor: COLORS[color] }}
-            onClick={() => handleAnswer(color)}
-          />
-        ))}
+        {LEVEL_COLORS[level as keyof typeof LEVEL_COLORS].map((color) => (
+            <button
+              key={color}
+              style={{ ...styles.colorButton, backgroundColor: COLORS[color] }}
+              onClick={() => handleAnswer(color)}
+            />
+          ))}
       </div>
     </div>
   )
 }
 
 export default App
-

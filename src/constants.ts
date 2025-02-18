@@ -9,9 +9,18 @@ export const COLORS = {
   purple: "#8A2BE2",
 }
 
-export const LEVEL_COLORS = {
+// COLORS のキーを型として再利用できるようにする
+export type ColorKey = keyof typeof COLORS
+
+// レベルごとに使う color の配列が、必ず COLORS のキーを並べたものだと型で保証する
+export const LEVEL_COLORS: {
+  1: ColorKey[],
+  2: ColorKey[],
+  3: ColorKey[],
+} = {
   1: ["red", "blue", "yellow"],
   2: ["red", "blue", "yellow", "white", "black"],
   3: ["red", "blue", "yellow", "white", "black", "orange", "green", "purple"],
 }
+
 
