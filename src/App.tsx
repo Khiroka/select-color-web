@@ -16,7 +16,7 @@ type Question = {
 const App: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameMode, setGameMode] = useState<"time" | "score" | null>(null);
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState<1 | 2 | 3>(1);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
@@ -108,10 +108,10 @@ const App: React.FC = () => {
               </div>
               <div style={styles.levelSelector}>
                 <span style={styles.levelText}>Level: {level}</span>
-                <button style={styles.levelButton} onClick={() => setLevel((prev) => Math.max(1, prev - 1))}>
+                <button style={styles.levelButton} onClick={() => setLevel((prev) => (prev > 1 ? (prev - 1) as 1 | 2 | 3 : prev))}>
                   -
                 </button>
-                <button style={styles.levelButton} onClick={() => setLevel((prev) => Math.min(3, prev + 1))}>
+                <button style={styles.levelButton} onClick={() => setLevel((prev) => (prev < 3 ? (prev + 1) as 1 | 2 | 3 : prev))}>
                   +
                 </button>
               </div>

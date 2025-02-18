@@ -1,7 +1,9 @@
 import type React from "react"
 import { LEVEL_COLORS } from "./constants"
 
-export const generateQuestion = (level: number) => {
+type Level = keyof typeof LEVEL_COLORS;
+
+export const generateQuestion = (level: Level) => {
   const colors = LEVEL_COLORS[level]
   const backgroundColor = colors[Math.floor(Math.random() * colors.length)]
   let textColor
@@ -43,4 +45,3 @@ export const updateHighScore = (
     setHighScoreEndless(newScore)
   }
 }
-
