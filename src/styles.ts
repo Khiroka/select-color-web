@@ -5,9 +5,13 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     minHeight: "100vh",
-    backgroundColor: "#1a1a1a",
+    background: "linear-gradient(to bottom right, #1a2a6c, #b21f1f, #fdbb2d)",
     color: "white",
     fontFamily: "Arial, sans-serif",
+    padding: "20px",
+    maxWidth: "500px",
+    margin: "0 auto",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
   },
   background: {
     display: "flex",
@@ -16,14 +20,13 @@ const styles = {
     justifyContent: "center",
     width: "100%",
     height: "100%",
-    background: "linear-gradient(to bottom right, #1a2a6c, #b21f1f, #fdbb2d)",
   },
   header: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    width: "100%",
     padding: "20px",
+    gap: "20px",
   },
   exitButton: {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
@@ -34,14 +37,22 @@ const styles = {
     fontSize: "16px",
     fontWeight: "bold",
     cursor: "pointer",
+    position: "relative" as const,
+    marginLeft: "auto",
+    marginRight: "0",
+    "@media (max-width: 768px)": {
+      marginTop: "10px",
+    },
   },
   scoreText: {
     fontSize: "24px",
     fontWeight: "bold",
+    textAlign: "center" as const,
   },
   timeText: {
     fontSize: "24px",
     fontWeight: "bold",
+    textAlign: "center" as const,
   },
   card: {
     width: "200px",
@@ -52,16 +63,24 @@ const styles = {
     borderRadius: "20px",
     margin: "20px 0",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    background: "rgba(255, 255, 255, 0.1)",
+    "@media (max-width: 768px)": {
+      width: "150px",
+      height: "150px",
+    },
   },
   cardText: {
     fontSize: "48px",
     fontWeight: "bold",
   },
   buttonContainer: {
-    display: "flex",
     flexWrap: "wrap" as const,
     justifyContent: "center",
     padding: "20px",
+    "@media (max-width: 768px)": {
+      flexDirection: "column" as const,
+      alignItems: "center",
+    },
   },
   colorButton: {
     width: "60px",
@@ -71,6 +90,12 @@ const styles = {
     border: "none",
     cursor: "pointer",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  },
+  playButton: {
+    display: "flex",
+    flexDirection: "column" as const,
+    gap: "10px",
+    margin: "20px"
   },
   title: {
     fontSize: "32px",
@@ -91,7 +116,7 @@ const styles = {
     cursor: "pointer",
   },
   highScoreContainer: {
-    backgroundColor: "rgba(255,255,255,0.1)",
+    background: "inherit",
     padding: "15px",
     borderRadius: "10px",
     marginBottom: "20px",
@@ -129,4 +154,3 @@ const styles = {
 }
 
 export default styles
-

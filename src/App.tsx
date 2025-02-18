@@ -96,8 +96,8 @@ const App: React.FC = () => {
             <>
               <div style={styles.highScoreContainer}>
                 <h2 style={styles.highScoreTitle}>High Scores</h2>
-                <p style={styles.highScoreText}>Score Attack: {highScoreEndless}</p>
-                <p style={styles.highScoreText}>60 Second Challenge: {highScoreTime}</p>
+                <p style={styles.highScoreText}>スコアタック: {highScoreEndless}</p>
+                <p style={styles.highScoreText}>60秒チャレンジ: {highScoreTime}</p>
               </div>
               <div style={styles.levelSelector}>
                 <span style={styles.levelText}>Level: {level}</span>
@@ -108,16 +108,18 @@ const App: React.FC = () => {
                   +
                 </button>
               </div>
+              <div style={styles.playButton}>
               <button style={styles.startButton} onClick={() => startGame("score")}>
-                Score Attack
+                スコアアタック
               </button>
               <button style={styles.startButton} onClick={() => startGame("time")}>
-                60 Second Challenge
+                60秒チャレンジ
               </button>
+              </div>
             </>
           )}
           {gameOver && (
-            <button style={styles.startButton} onClick={() => setGameStarted(false)}>
+            <button style={styles.startButton} onClick={() => {setGameStarted(false), setGameOver(false)}}>
               Back to Menu
             </button>
           )}
@@ -130,7 +132,7 @@ const App: React.FC = () => {
     <div style={styles.container}>
       <div style={styles.header}>
         <button style={styles.exitButton} onClick={() => setGameStarted(false)}>
-          Exit
+         終了
         </button>
         <span style={styles.scoreText}>Score: {score}</span>
         <span style={styles.timeText}>{gameMode === "time" ? `Time: ${timeLeft}s` : `Time: ${questionTimer}s`}</span>
