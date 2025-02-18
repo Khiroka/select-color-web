@@ -126,7 +126,7 @@ const App: React.FC = () => {
             </>
           )}
           {gameOver && (
-            <button style={styles.startButton} onClick={() => {setGameStarted(false), setGameOver(false)}}>
+            <button style={styles.startButton} onClick={() => { setGameStarted(false); setGameOver(false); }}>
               Back to Menu
             </button>
           )}
